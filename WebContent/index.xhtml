@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Exercício Web I</title>
+</h:head>
+<h:body>
+	<h2>CRUD Pessoa -> #{pessoaBean.pessoas.size()} pessoas cadastradas</h2>
+	<h:form>
+		<label for="nome">Nome: </label>
+		<h:inputText id="nome" value="#{pessoaBean.pessoa.nome}"></h:inputText>
+		<label for="cpf">CPF: </label>
+		<h:inputText id="cpf" value="#{pessoaBean.pessoa.cpf}"></h:inputText>
+		<label for="telefone">Telefone: </label>
+		<h:inputText id="telefone" value="#{pessoaBean.pessoa.telefone}"></h:inputText>
+		<h:commandButton action="#{pessoaBean.cadastrar}" value="Cadastrar" rendered="#{pessoaBean.atualizar == false}"></h:commandButton>
+		<h:commandButton action="#{pessoaBean.atualizarPessoa}" value="Atualizar" rendered="#{pessoaBean.atualizar}"></h:commandButton>
+	</h:form>
+	<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Nome" />
+			</f:facet>
+			<h:outputText value="#{pessoa.nome}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="CPF" />
+			</f:facet>
+			<h:outputText value="#{pessoa.cpf}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Telefone" />
+			</f:facet>
+			<h:outputText value="#{pessoa.telefone}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Opções" />
+			</f:facet>
+			<h:form>
+				<h:commandButton action="#{pessoaBean.editar(pessoa)}"
+					value="Editar"></h:commandButton>
+				<h:commandButton action="#{pessoaBean.excluir(pessoa)}"
+					value="Excluir"></h:commandButton>
+			</h:form>
+		</h:column>
+	</h:dataTable>
+</h:body>
+</html>
